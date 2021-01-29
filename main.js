@@ -7,6 +7,22 @@ function sleep(val) {
     });
 }
 
+async function init() {
+    let val = await sleep(0);
+    val = await sleep(val);
+    val = await sleep(val);
+    val = await sleep(val);
+    val = await sleep(val);
+    throw new Error();
+    return val;
+}
+
+init().then(function (val) {
+    console.log('hello ' + val);
+}).catch(function (e) {
+    console.error(e);
+});
+
 /* 無名関数で記述
 sleep(0).then(function(val) {
     return sleep(val);
@@ -18,9 +34,9 @@ sleep(0).then(function(val) {
 
 
 // アロー関数で記述
-sleep(0)
-    .then(val => sleep(val))
-    .then(val => sleep(val))
-    .then(val => sleep(val))
-    .then(val => sleep(val))
-    .then(val => sleep(val));
+// sleep(0)
+//     .then(val => sleep(val))
+//     .then(val => sleep(val))
+//     .then(val => sleep(val))
+//     .then(val => sleep(val))
+//     .then(val => sleep(val));
