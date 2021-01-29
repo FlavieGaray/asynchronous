@@ -1,28 +1,19 @@
-function sleep(ms) {
-    const startTime = new Date();
-    while (new Date() - startTime < ms) ;
-    console.log('sleep done');
-}
-
 const btn = document.querySelector('button');
-btn.addEventListener('click', function () {
-    console.log('button clicked');
+btn.addEventListener('click', function task2() {
+    console.log('task2 done');
 });
 
-/*sleep関数が呼ばれるとブラウザのメインスレッﾄﾞが3秒間sleepよって占有されている
-実行中は画面の更新・入力が待たされる
-　sleep関数とそれに伴うレンダリングが終了した時点で、メインスレッドが空く状態になるのでクリックイベントを受け付けられる*/
+function a() {
+    setTimeout(function task1() {
+        console.log('task1 done');
+    }, 4000);
 
-// sleep(3000);
+    const startTime = new Date();
+    while (new Date() - startTime < 5000) ;
 
+    console.log('fn a done');
+}
 
-/*setTimeoutに渡したコールバック関数が非同期処理として、メインスレッドから切り離される。
-　この非同期処理は2秒間たった後に実行されるので、この間はメインスレッドが空くので、画面の更新。入力などが可能
-そのためボタンをクリックした場合にはコンソールに「button clicked」が表示される。
-そして2秒たった後に、sleepの実行が始まるので、ここから3秒間の間またメインスレッドがsleep関数によって占有される*/
+a();
 
-// 非同期処理は一時的にメインスレッドから処理が切り離される
-
-setTimeout(function () {
-    sleep(3000);
-}, 2000);
+// タスクキューに入った処理(タスク)が非同期で実行される。
