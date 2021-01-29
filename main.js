@@ -1,21 +1,26 @@
-new Promise(function (resolve, reject) {
-    console.log('promise');
-    // reject('bye');
-    setTimeout(function() {
-        resolve('Hello');
-    }, 1000)
-}).then(function (data) {
-    console.log('then:' + data);
-    // throw new Error();
-    // 2つめのコールバックの引数にデータを渡す
-    return data;
-}).then(function (data) {
-    console.log('then:' + data);
-}).catch(function (data) {
-    console.log('catch:' + data);
-}).finally(function () {
-    // finallyには引数を渡せない
-    console.log('finally:');
-});
+function sleep(val) {
+    return new Promise(function (resolve) {
+        setTimeout(function () {
+            console.log(val++);
+            resolve(val);
+        }, 1000);
+    });
+}
 
-console.log('global end');
+/* 無名関数で記述
+sleep(0).then(function(val) {
+    return sleep(val);
+}).then(function(val) {
+    return sleep(val);
+}).then(function(val) {
+    return sleep(val);
+*/
+
+
+// アロー関数で記述
+sleep(0)
+    .then(val => sleep(val))
+    .then(val => sleep(val))
+    .then(val => sleep(val))
+    .then(val => sleep(val))
+    .then(val => sleep(val));
