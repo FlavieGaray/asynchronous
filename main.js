@@ -1,19 +1,16 @@
-const btn = document.querySelector('button');
-btn.addEventListener('click', function task2() {
-    console.log('task2 done');
-});
-
 function a() {
-    setTimeout(function task1() {
+    setTimeout(function () {
         console.log('task1 done');
-    }, 4000);
-
-    const startTime = new Date();
-    while (new Date() - startTime < 5000) ;
+        b();
+    });
 
     console.log('fn a done');
 }
 
+function b() {
+    console.log('fn b done');
+}
+
 a();
 
-// タスクキューに入った処理(タスク)が非同期で実行される。
+// b();
